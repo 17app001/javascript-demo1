@@ -10,19 +10,21 @@
         .date {
             color: red;
         }
+
+        p.date {
+            color: black;
+            font-size: 24px;
+            font-weight: 900;
+        }
     </style>
 </head>
 
-<body>
+<body onload="showTime()">
     <p class="date"></p>
     <h1 style="padding: 12px;">大樂透號碼</h1>
     <h3>開獎日期:<span class="date"></span></h3>
     <div class="lotto-number">
-        <p>
-        <ul>
-            <li>開獎中.....</li>
-        </ul>
-        </p>
+
     </div>
     <button id="start" type="button">開始</button>
     <script src="./js/index.js"></script>

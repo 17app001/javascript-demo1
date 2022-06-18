@@ -1,22 +1,18 @@
 const dateEl = document.querySelectorAll(".date");
-const lottoEl = document.querySelector("div.lotto-number ul");
+const lottoEl = document.querySelector("div.lotto-number");
 const startEl = document.querySelector("#start");
 
 console.log(startEl);
 
 const randInt = (start, end) => Math.floor(Math.random() * (end - start + 1)) + start;
 
-dateEl.forEach(element => element.innerText = "2022/06/11");
-
-
 startEl.addEventListener("click", () => {
     // 清空元素內容
     lottoEl.innerHTML = "";
+    dateEl[1].innerHTML = getTime(false);
 
-    for (let i = 0; i < 6; i++) {
-        const numbers = getLottoNumber(1, 49, 6, true).join(" ");
-        lottoEl.innerHTML += `<li>${numbers}</li>`;
-    }
+    // geneLottoLi();
+    geneLottoTable();
 
     const lottoLi = document.querySelectorAll(".lotto-number ul li");
     for (let i = 0; i < lottoLi.length; i++) {
@@ -25,9 +21,74 @@ startEl.addEventListener("click", () => {
             lottoLi[i].style.backgroundColor = "black";
         }
     }
-
-    console.log(lottoLi);
 });
+
+function geneLottoTable() {
+    let tempStr = "<table border='1'>";
+    for (let i = 0; i < 6; i++) {
+        tempStr += "<tr>";
+        const numbers = getLottoNumber(1, 49, 6, true);
+        for (let j = 0; j < numbers.length; j++) {
+            tempStr += `<td>${numbers[j]}</td>`;
+        }
+        tempStr += "</tr>";
+    }
+
+    tempStr += "</table>";
+    lottoEl.innerHTML = tempStr;
+}
+
+
+function geneLottoLi() {
+    for (let i = 0; i < 6; i++) {
+        const numbers = getLottoNumber(1, 49, 6, true).join(" ");
+        lottoEl.innerHTML += `<li>${numbers}</li>`;
+    }
+}
+
+
+let flash = true;
+
+function flashLotto() {
+    flash = !flash;
+    const lottoLi = document.querySelectorAll(".lotto-number ul li");
+    for (let i = 0; i < lottoLi.length; i++) {
+        if (i % 2 == 0) {
+            lottoLi[i].style.color = "orange";
+            if (flash) {
+                lottoLi[i].style.backgroundColor = "black";
+            } else {
+                lottoLi[i].style.backgroundColor = "white";
+            }
+        }
+    }
+}
+
+function getTime(fullTime = true) {
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = now.getMonth() + 1;
+    let date = now.getDate();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = String(now.getSeconds()).padStart(2, "0");
+
+    if (fullTime) {
+        return `${year}/${month}/${date} ${hours}:${minutes}:${seconds}`;
+    }
+
+    return `${year}/${month}/${date}`;
+}
+
+
+function showTime() {
+    dateEl[0].innerHTML = getTime();
+    setTimeout(() => {
+        showTime();
+        // flashLotto();
+    }, 1000);
+}
+
 
 function getBmi(height, weight, point = 2) {
     return (weight / (height / 100) ** 2).toFixed(point);
