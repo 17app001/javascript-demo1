@@ -1,31 +1,30 @@
 const dateEl = document.querySelectorAll(".date");
 const lottoEl = document.querySelector("div.lotto-number");
 const startEl = document.querySelector("#start");
+const countEl = document.querySelector("#count");
+
 
 console.log(startEl);
 
 const randInt = (start, end) => Math.floor(Math.random() * (end - start + 1)) + start;
+
+
 
 startEl.addEventListener("click", () => {
     // 清空元素內容
     lottoEl.innerHTML = "";
     dateEl[1].innerHTML = getTime(false);
 
-    // geneLottoLi();
+    //geneLottoLi();
     geneLottoTable();
-
-    const lottoLi = document.querySelectorAll(".lotto-number ul li");
-    for (let i = 0; i < lottoLi.length; i++) {
-        if (i % 2 == 0) {
-            lottoLi[i].style.color = "orange";
-            lottoLi[i].style.backgroundColor = "black";
-        }
-    }
 });
 
 function geneLottoTable() {
-    let tempStr = "<table border='1'>";
-    for (let i = 0; i < 6; i++) {
+    // console.log(countEl.value);
+    let count = Number(countEl.value)
+
+    let tempStr = "<table>";
+    for (let i = 0; i < count; i++) {
         tempStr += "<tr>";
         const numbers = getLottoNumber(1, 49, 6, true);
         for (let j = 0; j < numbers.length; j++) {
@@ -38,14 +37,12 @@ function geneLottoTable() {
     lottoEl.innerHTML = tempStr;
 }
 
-
 function geneLottoLi() {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 10; i++) {
         const numbers = getLottoNumber(1, 49, 6, true).join(" ");
         lottoEl.innerHTML += `<li>${numbers}</li>`;
     }
 }
-
 
 let flash = true;
 
@@ -79,7 +76,6 @@ function getTime(fullTime = true) {
 
     return `${year}/${month}/${date}`;
 }
-
 
 function showTime() {
     dateEl[0].innerHTML = getTime();

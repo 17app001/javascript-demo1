@@ -5,28 +5,88 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>樂透號碼產生器</title>
     <style>
-        .date {
+        body {
+            background-color: gold;
+        }
+
+        span.date {
             color: red;
         }
 
         p.date {
-            color: black;
-            font-size: 24px;
-            font-weight: 900;
+            display: inline-block;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: black;
+            color: white;
+            /* font-size: 24px; */
+            /* font-weight: 900; */
+        }
+
+        #container {
+            width: 80%;
+            margin: 16px auto;
+            text-align: center;
+        }
+
+        table {
+            width: 60%;
+            margin: 16px auto;
+            border: 3px solid black;
+        }
+
+        td {
+            width: 48px;
+            border: 1px solid rgb(17, 17, 78);
+            background-color: white;
+        }
+
+        td:last-child {
+            background-color: brown;
+            color: white;
+        }
+
+        button {
+            width: 100px;
+            height: 30px;
+            border-radius: 3px;
+            background-color: lawngreen;
+        }
+
+        @media screen and (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            #container {
+                width: 90%;
+            }
         }
     </style>
 </head>
 
 <body onload="showTime()">
-    <p class="date"></p>
-    <h1 style="padding: 12px;">大樂透號碼</h1>
-    <h3>開獎日期:<span class="date"></span></h3>
-    <div class="lotto-number">
+    <div id="container">
+        <p class="date"></p>
+        <h1 style="padding: 12px; color:darkred">大樂透號碼產生器</h1>
+        選擇:
+        <select name="count" id="count" onchange="geneLottoTable()">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+        </select>
+        <h3>開獎日期:<span class="date"></span></h3>
+        <div class="lotto-number">
 
+        </div>
+        <button id="start" type="button">開始</button>
     </div>
-    <button id="start" type="button">開始</button>
     <script src="./js/index.js"></script>
 </body>
 
